@@ -1,4 +1,5 @@
 export type EnvironmentVariables = {
+  PORT: number;
   AIR_QUALITY_API_URL: string;
   API_KEY: string;
   LONGITUDE_TOKEN: string;
