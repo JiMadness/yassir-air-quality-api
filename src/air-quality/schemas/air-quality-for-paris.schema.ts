@@ -19,4 +19,5 @@ export class AirQualityForParis {
   aqiavr: number;
 }
 
-export const AirQualityForParisSchema = SchemaFactory.createForClass(AirQualityForParis);
+export const AirQualityForParisSchema =
+  SchemaFactory.createForClass(AirQualityForParis);

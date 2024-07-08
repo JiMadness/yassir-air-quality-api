@@ -13,9 +13,8 @@ export class AirQualityService {
   async getAirQualityForCoordinates(
     coordinates: Coordinates,
   ): Promise<AirQuality> {
-    const providerResponse: AirQualityProviderResponse = await this.airQualityProviderService.getAirQuality(
-      coordinates,
-    );
+    const providerResponse: AirQualityProviderResponse =
+      await this.airQualityProviderService.getAirQuality(coordinates);
 
     return this.getAirQualityFromProviderResponse(providerResponse);
   }
