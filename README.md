@@ -108,6 +108,7 @@ This controller provides endpoints to retrieve air quality data.
 
 The following environment variables need to be set:
 
+- `PORT`: The port that the server will use.
 - `MONGO_URI`: The MongoDB connection string.
 - `AIR_QUALITY_API_URL`: The base URL for the air quality API.
 - `API_KEY`: The API key for the air quality API.
