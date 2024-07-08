@@ -6,7 +6,8 @@ import { EnvironmentVariables } from './types/environment-variables.type';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService: ConfigService<EnvironmentVariables> = app.get(ConfigService);
+  const configService: ConfigService<EnvironmentVariables> =
+    app.get(ConfigService);
   const port = configService.get<number>('PORT');
   app.useGlobalPipes(
     new ValidationPipe({

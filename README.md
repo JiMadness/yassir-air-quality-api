@@ -32,6 +32,7 @@ To install and set up the project, follow these steps:
 
     ```sh
     PORT=3000
+    MONGODB_URI=mongodb+srv://api:<password>@cluster0.inmzjdm.mongodb.net/air-quality?retryWrites=true&w=majority&appName=Cluster0
     AIR_QUALITY_API_URL=https://api.airvisual.com/v2/nearest_city?lat={latitude}&lon={longitude}&key={apikey}
     API_KEY=your-api-key
     API_KEY_TOKEN={apikey}
@@ -87,6 +88,8 @@ curl -X GET "http://localhost:3000/air-quality?latitude=40.7128&longitude=-74.00
 
 Ensure you have the following environment variables set in your `.env` file:
 
+- `PORT`: The port on which the server will run.
+- `MONGO_URI`: The connection string to the MongoDB cluster.
 - `AIR_QUALITY_API_URL`: The base URL of the air quality API with placeholders for latitude, longitude, and API key.
 - `API_KEY`: The API key for the air quality data provider.
 - `API_KEY_TOKEN`: The placeholder token for the API key in the URL.
