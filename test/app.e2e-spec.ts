@@ -4,10 +4,12 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app/app.module';
 import { AirQualityService } from '../src/air-quality/air-quality/air-quality.service';
 import { AirQuality } from '../src/air-quality/air-quality/types/air-quality.type';
+import { ParisAirQualityService } from '../src/air-quality/paris-air-quality/paris-air-quality.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let airQualityService: AirQualityService;
+  let parisAirQualityService: ParisAirQualityService;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -17,6 +19,9 @@ describe('AppController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     airQualityService = moduleFixture.get<AirQualityService>(AirQualityService);
+    parisAirQualityService = moduleFixture.get<ParisAirQualityService>(
+      ParisAirQualityService,
+    );
     await app.init();
   });
 
@@ -73,6 +78,30 @@ describe('AppController (e2e)', () => {
       return request(app.getHttpServer())
         .get('/air-quality')
         .query(mockCoordinates)
+        .expect(500);
+    });
+  });
+
+  describe('/air-quality/paris/most-polluted/ts (GET)', () => {
+    it('should return the timestamp when Paris was most polluted', async () => {
+      const mockTimestamp = { ts: '2024-07-08T12:00:00Z' };
+      jest
+        .spyOn(parisAirQualityService, 'getDateTimeWhenMostPolluted')
+        .mockResolvedValue(mockTimestamp);
+
+      await request(app.getHttpServer())
+        .get('/air-quality/paris/most-polluted/ts')
+        .expect(200)
+        .expect(mockTimestamp);
+    });
+
+    it('should return 500 if service fails', async () => {
+      jest
+        .spyOn(parisAirQualityService, 'getDateTimeWhenMostPolluted')
+        .mockRejectedValue(new Error('Service failed'));
+
+      await request(app.getHttpServer())
+        .get('/air-quality/paris/most-polluted/ts')
         .expect(500);
     });
   });
