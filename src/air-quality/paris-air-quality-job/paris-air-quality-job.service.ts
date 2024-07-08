@@ -40,7 +40,7 @@ export class ParisAirQualityJobService {
       ),
     };
 
-    this.logger.log(`New air quality for Paris:\n${JSON.stringify(newAirQualityForParis)}`);
+    this.logger.log('New air quality for Paris: %o', newAirQualityForParis);
 
     await this.airQualityForParisModel.create(newAirQualityForParis);
     this.logger.log('Paris air quality job finished successfully');
