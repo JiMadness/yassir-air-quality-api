@@ -15,7 +15,7 @@ export class AirQualityForParis {
   aqicn: number;
   @Prop({ type: String, required: true })
   maincn: string;
-  @Prop({ type: Number, required: true })
+  @Prop({ type: Number, required: true, index: true })
   aqiavr: number;
 }
 
